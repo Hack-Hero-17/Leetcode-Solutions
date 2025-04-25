@@ -1,2 +1,3 @@
-# Write your MySQL query statement below
-select name as Employee from employee e where salary > ( select salary from employee where id = e.managerId )
+/* Write your PL/SQL query statement below */
+SELECT EMP.name AS Employee FROM Employee EMP,Employee MGR
+WHERE EMP.managerId=MGR.id AND EMP.salary>MGR.salary
