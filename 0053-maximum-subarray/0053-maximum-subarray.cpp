@@ -31,7 +31,7 @@ public:
     for (int i = ansStart; i <= ansEnd; i++) {
         cout << arr[i] << " ";
     }
-    cout << "]n";
+    cout << "]";
 
     // To consider the sum of the empty subarray
     // uncomment the following check:
