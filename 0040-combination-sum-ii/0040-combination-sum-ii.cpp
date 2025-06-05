@@ -17,7 +17,7 @@ public:
             if( i>ind && arr[i] == arr[i-1] ) continue;
             if( arr[i] > target ) break;
             ds.push_back( arr[i] );
-            findCombination( ind+1 , target-arr[i], arr, ans, ds );
+            findCombination( i+1 , target-arr[i], arr, ans, ds );
             ds.pop_back();
         }
     }
