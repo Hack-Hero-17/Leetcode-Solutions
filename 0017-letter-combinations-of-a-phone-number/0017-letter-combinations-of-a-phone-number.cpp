@@ -26,7 +26,7 @@ public:
         }
         string letters = digitToLetters.at(digits[ind]);
         for( char ch : letters ){
-            backtrack( ind+1 , digits , comb + (string)ch , res , digitToLetters );
+            backtrack( ind+1 , digits , comb + ch , res , digitToLetters );
         }
     }
 };
