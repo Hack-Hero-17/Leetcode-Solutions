@@ -12,8 +12,8 @@ public:
             return;
         }
 
-        for( int start = num ; strt<=n ; start++ ){
-            comb.push_back(start));
+        for( int start = num ; start<=n ; start++ ){
+            comb.push_back(start);
             backtrack( start+1, comb, res, n , k);
             comb.pop_back();
         }
