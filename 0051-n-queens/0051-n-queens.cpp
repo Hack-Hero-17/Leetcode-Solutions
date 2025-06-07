@@ -21,7 +21,7 @@ public:
     }
     bool isSafe( int n , vector<string>& NQueens , int row , int col ){
         // int i,j;
-        for( int i = 0 ; i<n ; i++ ){
+        for( int i = 0 ; i<=row ; i++ ){
             if( NQueens[i][col] == 'Q' )
                 return false;
         }
