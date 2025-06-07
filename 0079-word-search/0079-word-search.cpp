@@ -20,7 +20,7 @@ public:
     bool searchNext( vector<vector<char>>& board , string& word, int row , int col , int index, int m , int n ){
         if( index == word.length() )
             return true;
-        if( row<0 || col<0 || row>m || col>n || word[index] != board[row][col] || board[row][col] == '!' )
+        if( row<0 || col<0 || row==m || col==n || word[index] != board[row][col] || board[row][col] == '!' )
             return false;
         
         char c = board[row][col];
