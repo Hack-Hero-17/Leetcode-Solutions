@@ -14,8 +14,8 @@ public:
         while( left <= right ){
             if( filtered[left] != filtered[right] )
                 return false;
-            left ++;
-            right --;
+            left++;
+            right--;
         }
         return true;
     }
