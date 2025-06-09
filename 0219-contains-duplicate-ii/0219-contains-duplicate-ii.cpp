@@ -8,7 +8,6 @@ public:
                     return true;
             }
             mp[nums[i]] = i;
-            cout << mp[nums[i]];
         }
         return false;
     }
