@@ -12,7 +12,7 @@ public:
 
         int currGas=0 , start = 0;
         for( int i=0 ; i<gas.size() ; i++ ){
-            currGas += gast[i] - cost[i];
+            currGas += gas[i] - cost[i];
             if( currGas < 0)
             {
                 currGas = 0;
