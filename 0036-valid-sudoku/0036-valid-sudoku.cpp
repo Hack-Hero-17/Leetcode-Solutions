@@ -15,7 +15,7 @@ public:
                     return false;
                 rows[r].insert(value);
                 cols[c].insert(value);
-                boxes[boardIndex].value(value);
+                boxes[boardIndex].insert(value);
             }
         }
         return true;
