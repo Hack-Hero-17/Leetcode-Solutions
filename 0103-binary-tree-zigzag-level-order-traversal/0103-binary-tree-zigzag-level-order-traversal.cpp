@@ -36,7 +36,7 @@ public:
                     node.push( n->right );
             }
 
-             leftToRight = !leftToRight;
+            leftToRight = !leftToRight;
             result.push_back( row );
         }
         return result;
