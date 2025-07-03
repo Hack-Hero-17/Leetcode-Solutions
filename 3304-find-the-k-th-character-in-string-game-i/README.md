@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/find-the-k-th-character-in-string-game-i">3304. Find the K-th Character in String Game I</a></h2><h3>Easy</h3><hr><p>Alice and Bob are playing a game. Initially, Alice has a string <code>word = &quot;a&quot;</code>.</p>
+<h2><a href="https://leetcode.com/problems/find-the-k-th-character-in-string-game-i/?envType=daily-question&envId=2025-07-03">3304. Find the K-th Character in String Game I</a></h2><h3>Easy</h3><hr><p>Alice and Bob are playing a game. Initially, Alice has a string <code>word = &quot;a&quot;</code>.</p>
 
 <p>You are given a <strong>positive</strong> integer <code>k</code>.</p>
 
