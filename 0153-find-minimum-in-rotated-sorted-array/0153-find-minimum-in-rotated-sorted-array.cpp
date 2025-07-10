@@ -8,12 +8,19 @@ public:
         int left , right, mid;
         left = 0;
         right = arr.size() - 1;
-        while( left <= right ){
+        while( left < right ){
             mid = ( left + right )/2;
-            if( arr[mid] <= arr[right] )
-                right = mid;
-            else
-                left = mid+1;
+            if( arr[left] < arr[mid] ){
+                if( arr[mid] > arr[right] ){
+                    left = mid+1;
+                }else{
+                    return arr[left];
+                }
+            }else{
+                if( arr[mid] < arr[right] ){
+                    right = mid;
+                }
+            }
         }
         return arr[left];
     }
