@@ -36,7 +36,7 @@ public:
             if( visited.find(neighbour.first) == visited.end() ){
                 double subResult = dfs( neighbour.first, den , graph , memo , visited );
                 if( subResult !=  -1.0 ){
-                     double fullResult = neighbor.second * subResult;
+                     double fullResult = neighbour.second * subResult;
                     memo[num][den] = fullResult;
                     memo[den][num] = 1.0 / fullResult;
                     return fullResult;
