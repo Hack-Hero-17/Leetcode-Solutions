@@ -8,7 +8,7 @@ public:
         int left , right, mid;
         left = 0;
         right = arr.size() - 1;
-        while( left < right ){
+        while( left <= right ){
             mid = ( left + right )/2;
             if( arr[mid] <= arr[right] )
                 right = mid;
