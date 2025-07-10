@@ -6,8 +6,8 @@ public:
         vector<int> ans;
 
         for(auto x: prerequisites){
-            adj[x[0]].push_back(x[1]);
-            indegree[x[1]]++;
+            adj[x[1]].push_back(x[0]);
+            indegree[x[0]]++;
         }
 
         queue<int> q;
