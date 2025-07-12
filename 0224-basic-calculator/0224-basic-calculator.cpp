@@ -6,7 +6,7 @@ public:
         int sign = +1;
         for( int i=0 ; i<s.length() ; i++ ){
             char ch = s[i];
-            if( isdigit(ch)){
+            if( isdigit(ch) ){
                 long long int num = 0;
                 while( i<s.length() && isdigit(s[i]) ){
                     num = num*10 + s[i] - '0';
