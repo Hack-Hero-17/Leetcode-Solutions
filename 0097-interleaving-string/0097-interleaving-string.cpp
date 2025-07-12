@@ -3,7 +3,7 @@ public:
     bool isInterleave(string s1, string s2, string s3) {
         if( s3.size() != (s1.size() + s2.size()) )
             return false;
-        vector<vector<int>> dp( s1.size() , (vector<int>(s2.size(), -1)));
+        vector<vector<int>> dp( s1.size() + 1 , (vector<int>(s2.size()+1, -1)));
         return helper( s1, s2, s3, s1.size()-1 , s2.size()-1 , s3.size()-1, dp );
     }
     bool helper( string s1, string s2, string s3, int l1, int l2, int l3 , vector<vector<int>>&dp){
