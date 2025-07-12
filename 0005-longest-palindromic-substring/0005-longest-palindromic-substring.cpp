@@ -12,7 +12,7 @@ public:
 
             int max_len = max( odd , even );
 
-            if( max_len > end-start ){
+            if( max_len > end-start+1 ){
                 start = i - ( max_len -1 )/2;
                 end = i + max_len/2;
             }
