@@ -3,44 +3,40 @@ public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
         int n = numCourses;
         vector<vector<int>> adj(n);
-        vector<int> indegree(n, 0);
-        vector<int> ans;
 
-        for(auto x: prerequisites){
-            adj[x[1]].push_back(x[0]);
-            indegree[x[0]]++;
+        for(auto &edge:prerequisites){
+            adj[edge[1]].push_back(edge[0]);
         }
 
+        vector<int> Indegree(n);
+        for(int i{0};i<n;i++){
+            for(auto &it:adj[i]){
+                Indegree[it]++;
+            }
+        }
+        
         queue<int> q;
-        for(int i = 0; i < n; i++){
-            if(indegree[i] == 0){
+        
+        for(int i{0};i<n;i++){
+            if(Indegree[i]==0){
                 q.push(i);
             }
         }
-
+        vector<int> res;
         while(!q.empty()){
-            auto t = q.front();
-            ans.push_back(t);
+            int node = q.front();
             q.pop();
-
-            for(auto x: adj[t]){
-                indegree[x]--;
-                if(indegree[x] == 0){
-                    q.push(x);
+            res.push_back(node);
+            
+            for(auto &it:adj[node]){
+                Indegree[it]--;
+                
+                if(Indegree[it]==0){
+                    q.push(it);
                 }
             }
         }
-        if( ans.size() == n )
-            return ans;
-        else
-            return {};
+        vector<int> empty;
+        return (res.size()==n)?res:empty;
     }
 };
-
-
-// class Solution {
-// public:
-//     bool canFinish(int n, vector<vector<int>>& prerequisites) {
-        
-//     }
-// };
