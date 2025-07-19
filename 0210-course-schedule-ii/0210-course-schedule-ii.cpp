@@ -33,7 +33,7 @@ public:
         if( ans.size() == n )
             return ans;
         else
-            return [];
+            return {};
     }
 };
 
