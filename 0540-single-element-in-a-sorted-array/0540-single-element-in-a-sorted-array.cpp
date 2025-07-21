@@ -8,5 +8,5 @@ public:
             ans = ans ^ arr[i];
         }
         return ans;
-        }
+    }
 };
