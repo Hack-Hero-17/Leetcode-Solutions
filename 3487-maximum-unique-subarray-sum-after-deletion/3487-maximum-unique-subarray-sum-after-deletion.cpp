@@ -2,7 +2,7 @@ class Solution {
 public:
     int maxSum(vector<int>& nums) {
         int mx = * max_element( nums.begin() , nums.end() );
-        if( max <= 0 ){
+        if( mx <= 0 ){
             return mx;
         }
         unordered_set<int> seen;
