@@ -1,21 +1,11 @@
 class Solution {
 public:
-    int solve( int i , int j , int m , vector<vector<int>>& dp , vector<vector<int>>& mat )
-    {
-        if( dp[i][j] != -1 )
-            return dp[i][j];
-        if( i==m-1 )
-            return mat[i][j];
-        
-        int down = mat[i][j] + solve( i+1 , j , m , dp , mat );
-        int right = mat[i][j] + solve( i+1 , j+1 , m , dp , mat );
-
-        return dp[i][j] = min( down , right );
-    }
     int minimumTotal(vector<vector<int>>& triangle) {
-        int m = triangle.size();
-        vector<vector<int>> dp( m , vector<int>( m , -1 ) );
+        for (int i = triangle.size() - 2; i >= 0; i--)
+            for (int j = 0; j < triangle[i].size(); j++)
+                triangle[i][j] +=
+                    min(triangle[i + 1][j], triangle[i + 1][j + 1]);
 
-        return solve( 0 , 0 , m , dp , triangle );
+        return triangle[0][0];
     }
 };
