@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/delete-nodes-from-linked-list-present-in-array/?envType=daily-question&envId=2025-11-01">3217. Delete Nodes From Linked List Present in Array</a></h2><h3>Medium</h3><hr><p>You are given an array of integers <code>nums</code> and the <code>head</code> of a linked list. Return the <code>head</code> of the modified linked list after <strong>removing</strong> all nodes from the linked list that have a value that exists in <code>nums</code>.</p>
+<h2><a href="https://leetcode.com/problems/delete-nodes-from-linked-list-present-in-array">3217. Delete Nodes From Linked List Present in Array</a></h2><h3>Medium</h3><hr><p>You are given an array of integers <code>nums</code> and the <code>head</code> of a linked list. Return the <code>head</code> of the modified linked list after <strong>removing</strong> all nodes from the linked list that have a value that exists in <code>nums</code>.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
