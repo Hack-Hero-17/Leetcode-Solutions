@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/1-bit-and-2-bit-characters/">717. 1-bit and 2-bit Characters</a></h2><h3>Easy</h3><hr><p>We have two special characters:</p>
+<h2><a href="https://leetcode.com/problems/1-bit-and-2-bit-characters/?envType=daily-question&envId=2025-11-18">717. 1-bit and 2-bit Characters</a></h2><h3>Easy</h3><hr><p>We have two special characters:</p>
 
 <ul>
 	<li>The first character can be represented by one bit <code>0</code>.</li>
