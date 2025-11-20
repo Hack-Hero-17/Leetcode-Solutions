@@ -1,10 +1,5 @@
 class Solution {
 public:
-    int intersectionSizeTwo(vector<vector<int>>& intervals) {
-        
-    }
-};class Solution {
-public:
     static int intersectionSizeTwo(vector<vector<int>>& I) {
         sort(I.begin(), I.end(), [](vector<int>& X, vector<int>& Y){ 
             const int x0=X[0], x1=X[1], y0=Y[0], y1=Y[1]; 
