@@ -1,23 +1,21 @@
 class Solution {
 public:
-    static long long maximumHappinessSum(vector<int>& happiness, int k) {
-        const int n = happiness.size();
-        sort(happiness.begin(), happiness.end());
+    long long maximumHappinessSum(vector<int>& happiness, int k) {
+        // Sort in descending order
+        sort(happiness.begin(), happiness.end(), greater<int>());
+        
+        long long totalHappinessSum = 0;
+        int turns = 0;
+        
+        // Calculate the maximum happiness sum
+        for(int i = 0; i < k; i++) {
+            // Adjust happiness and ensure it's not negative
+            totalHappinessSum += max(happiness[i] - turns, 0);  
 
-        long long sum = 0;
-        for (int i = 0; i < k; i++) {
-            long long x = max(0, happiness[n - 1 - i] - i);
-            //    cout<<x<<endl;
-            sum += x;
+            // Increment turns for the next iteration
+            turns++; 
         }
-
-        return sum;
+        
+        return totalHappinessSum;
     }
 };
-
-auto init = []() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
-    return 'c';
-}();
