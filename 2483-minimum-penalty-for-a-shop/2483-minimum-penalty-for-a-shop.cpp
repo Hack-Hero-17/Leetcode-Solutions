@@ -1,20 +1,19 @@
 class Solution {
- public:
-  int bestClosingTime(string customers) {
-    // Instead of computing the minimum penalty, we can compute the maximum
-    // profit.
-    int ans = 0;
-    int profit = 0;
-    int maxProfit = 0;
-
-    for (int i = 0; i < customers.length(); ++i) {
-      profit += customers[i] == 'Y' ? 1 : -1;
-      if (profit > maxProfit) {
-        maxProfit = profit;
-        ans = i + 1;
-      }
+public:
+    int bestClosingTime(string& customers) {
+        int n = customers.size();
+    
+        int penalty=0;//without adding y_rem does not matter 
+        int minP=penalty, minI=0;
+    
+        for (int i=1; i<=n; i++) {
+            int y=customers[i-1]=='Y'?1:-1;
+            penalty-=y;
+            if (minP>penalty) {
+                minP=penalty;
+                minI=i;
+            }
+        }
+        return minI;
     }
-
-    return ans;
-  }
 };
