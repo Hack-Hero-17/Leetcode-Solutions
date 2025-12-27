@@ -1,43 +1,42 @@
 class Solution {
 public:
     int mostBooked(int n, vector<vector<int>>& meetings) {
-        vector<long long> busy(n, 0); // Room end times
-        vector<int> count(n, 0);      // Booking counts per room
-
+        vector<long long> roomAvailabilityTime(n, 0);
+        vector<int> meetingCount(n, 0);
         sort(meetings.begin(), meetings.end());
 
-        for (auto& meeting : meetings) {
+        for (auto& meeting: meetings) {
             int start = meeting[0], end = meeting[1];
-            long long earliest = LLONG_MAX;
-            int roomIndex = -1;
-            bool assigned = false;
+            long long minRoomAvailabilityTime = LLONG_MAX;
+            int minAvailableTimeRoom = 0;
+            bool foundUnusedRoom = false;
 
-            for (int i = 0; i < n; ++i) {
-                if (busy[i] < earliest) {
-                    earliest = busy[i];
-                    roomIndex = i;
-                }
-                if (busy[i] <= start) {
-                    busy[i] = end;
-                    count[i]++;
-                    assigned = true;
+            for (int i = 0; i < n; i++) {
+                if (roomAvailabilityTime[i] <= start) {
+                    foundUnusedRoom = true;
+                    meetingCount[i]++;
+                    roomAvailabilityTime[i] = end;
                     break;
                 }
+
+                if (minRoomAvailabilityTime > roomAvailabilityTime[i]) {
+                    minRoomAvailabilityTime = roomAvailabilityTime[i];
+                    minAvailableTimeRoom = i;
+                }
             }
 
-            if (!assigned) {
-                busy[roomIndex] += (end - start);
-                count[roomIndex]++;
+            if (!foundUnusedRoom) {
+                roomAvailabilityTime[minAvailableTimeRoom] += end - start;
+                meetingCount[minAvailableTimeRoom]++;
             }
         }
-
-        int res = 0, maxCount = 0;
-        for (int i = 0; i < n; ++i) {
-            if (count[i] > maxCount) {
-                maxCount = count[i];
-                res = i;
+        int maxMeetingCount = 0, maxMeetingCountRoom = 0;
+        for (int i = 0; i < n; i++) {
+            if (meetingCount[i] > maxMeetingCount) {
+                maxMeetingCount = meetingCount[i];
+                maxMeetingCountRoom = i;
             }
         }
-        return res;
+        return maxMeetingCountRoom;
     }
 };
