@@ -1,42 +1,45 @@
+using ll = long long;
+
 class Solution {
 public:
     int mostBooked(int n, vector<vector<int>>& meetings) {
-        vector<long long> roomAvailabilityTime(n, 0);
-        vector<int> meetingCount(n, 0);
         sort(meetings.begin(), meetings.end());
 
-        for (auto& meeting: meetings) {
-            int start = meeting[0], end = meeting[1];
-            long long minRoomAvailabilityTime = LLONG_MAX;
-            int minAvailableTimeRoom = 0;
-            bool foundUnusedRoom = false;
+        priority_queue<int, vector<int>, greater<int>> ready;
+        priority_queue<pair<ll,int>, vector<pair<ll,int>>, greater<pair<ll,int>>> rooms;
 
-            for (int i = 0; i < n; i++) {
-                if (roomAvailabilityTime[i] <= start) {
-                    foundUnusedRoom = true;
-                    meetingCount[i]++;
-                    roomAvailabilityTime[i] = end;
-                    break;
-                }
-
-                if (minRoomAvailabilityTime > roomAvailabilityTime[i]) {
-                    minRoomAvailabilityTime = roomAvailabilityTime[i];
-                    minAvailableTimeRoom = i;
-                }
-            }
-
-            if (!foundUnusedRoom) {
-                roomAvailabilityTime[minAvailableTimeRoom] += end - start;
-                meetingCount[minAvailableTimeRoom]++;
-            }
+        for (int r = 0; r < n; r++){
+            ready.push(r);
         }
-        int maxMeetingCount = 0, maxMeetingCountRoom = 0;
-        for (int i = 0; i < n; i++) {
-            if (meetingCount[i] > maxMeetingCount) {
-                maxMeetingCount = meetingCount[i];
-                maxMeetingCountRoom = i;
+
+        vector<int> res(n, 0);
+
+        for (auto& mt : meetings){
+            ll s = mt[0];
+            ll e = mt[1];
+
+            while (!rooms.empty() && rooms.top().first <= s){
+                int r = rooms.top().second;
+                rooms.pop();
+                ready.push(r);
             }
+
+            int r;
+            if (!ready.empty()){
+                r = ready.top();
+                ready.pop();
+                rooms.push({e, r});
+            } else {
+                auto top = rooms.top();
+                rooms.pop();
+                r = top.second;
+                ll t = top.first;
+                rooms.push({t + (e - s), r});
+            }
+
+            res[r]++;
         }
-        return maxMeetingCountRoom;
+
+        return distance(res.begin(), max_element(res.begin(), res.end()));
     }
 };
