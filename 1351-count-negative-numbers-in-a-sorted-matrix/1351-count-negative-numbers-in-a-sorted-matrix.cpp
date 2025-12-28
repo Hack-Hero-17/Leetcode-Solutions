@@ -1,41 +1,20 @@
 class Solution {
 public:
-    /**
-     * Count negative numbers in a sorted matrix.
-     * Uses binary search on each row to find the first negative.
-     *
-     * Time Complexity: O(m log n) where m is rows and n is columns
-     * Space Complexity: O(1)
-     */
     int countNegatives(vector<vector<int>>& grid) {
-        int rows = grid.size();
-        int cols = grid[0].size();
-        int totalCount = 0;
-
-        // Apply binary search on each row
-        for (int row = 0; row < rows; row++) {
-            // Binary search template: find first negative (first true)
-            int left = 0;
-            int right = cols - 1;
-            int firstTrueIndex = -1;
-
-            while (left <= right) {
-                int mid = left + (right - left) / 2;
-                // Feasible condition: is this element negative?
-                if (grid[row][mid] < 0) {
-                    firstTrueIndex = mid;
-                    right = mid - 1;  // Search left for earlier negative
-                } else {
-                    left = mid + 1;  // Search right for negatives
-                }
-            }
-
-            // If we found a negative, count all elements from that index to end
-            if (firstTrueIndex != -1) {
-                totalCount += cols - firstTrueIndex;
-            }
+        int n=grid.size();
+        int m=grid[0].size();
+        int sum=0;
+        
+        // Using binaryS to find the number i_max
+        vector<int> col0(n);
+        for(int i=0; i<n; i++) col0[i]=grid[i][0];
+        int i_max=upper_bound(col0.begin(),col0.end(),0,greater<int>())-col0.begin(); 
+    //    cout<<"i_max="<<i_max<<endl;
+        ////////////////////
+        for (int i=0; i<i_max; i++){
+            sum+= m-(upper_bound(grid[i].begin(),grid[i].end(),0,greater<int>())-grid[i].begin());
         }
-
-        return totalCount;
+        sum+=(n-i_max)*m;
+        return sum;
     }
 };
