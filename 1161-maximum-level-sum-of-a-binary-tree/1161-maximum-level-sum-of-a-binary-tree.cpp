@@ -1,99 +1,40 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-
- 
-//Approach-1 (Using BFS - T.C : O(n))
-class Solution {
-public:
+ class Solution {
+ public:
+    
+    map<int, int> mp;
+    
+     void DFS(TreeNode* root, int currLevel) {
+        
+        if(!root)
+             return;
+        
+        mp[currLevel] += root->val;
+        
+         DFS(root->left, currLevel+1);
+         DFS(root->right, currLevel+1);
+        
+     }
+    
     int maxLevelSum(TreeNode* root) {
+         mp.clear();
+        
+         DFS(root, 1);
+        
         int maxSum = INT_MIN;
-        int resultLevel = 0;
-        int currLevel = 1;
+         int result = 0;
         
-        queue<TreeNode*> que;
-        que.push(root);
-        
-        
-        while(!que.empty()) {
-
-            int n = que.size();
+         for(auto &it : mp) {
             
-            int sum = 0;
+             int level = it.first;
+            int sum   = it.second;
             
-            while(n--) {
-                
-                TreeNode* node = que.front();
-                que.pop();
-                
-                sum += node->val;
-                
-                if(node->left)
-                    que.push(node->left);
-                
-                if(node->right)
-                    que.push(node->right);
-            }
+             if(sum > maxSum) {
+                 maxSum = sum;
+                result = level;
+             }
             
-            if(sum > maxSum) {
-                maxSum = sum;
-                resultLevel = currLevel;
-            }
-            currLevel++;
-        }
+         }
         
-        return resultLevel;
-        
-    }
-};
-
-
-// //Approach-2 (Using DFS - T.C : O(n))
-// class Solution {
-// public:
-    
-//     map<int, int> mp;
-    
-//     void DFS(TreeNode* root, int currLevel) {
-        
-//         if(!root)
-//             return;
-        
-//         mp[currLevel] += root->val;
-        
-//         DFS(root->left, currLevel+1);
-//         DFS(root->right, currLevel+1);
-        
-//     }
-    
-//     int maxLevelSum(TreeNode* root) {
-//         mp.clear();
-        
-//         DFS(root, 1);
-        
-//         int maxSum = INT_MIN;
-//         int result = 0;
-        
-//         for(auto &it : mp) {
-            
-//             int level = it.first;
-//             int sum   = it.second;
-            
-//             if(sum > maxSum) {
-//                 maxSum = sum;
-//                 result = level;
-//             }
-            
-//         }
-        
-//         return result;
-//     }
-// };
+         return result;
+     }
+ };
