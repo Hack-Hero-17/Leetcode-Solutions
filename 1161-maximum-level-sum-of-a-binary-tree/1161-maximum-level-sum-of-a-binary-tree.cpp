@@ -1,27 +1,24 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+// C-array implement queue
+TreeNode* q[100000];// queue for TreeNode*
+int front=0, back=0;
 class Solution {
 public:
-    vector<int> sum={INT_MIN};
-    void dfs(TreeNode* Node, int level=1){
-        if (Node==NULL) return;
-        if (sum.size()==level) sum.push_back(Node->val);
-        else sum[level]+=Node->val;
-        dfs(Node->left, level+1);
-        dfs(Node->right, level+1);
-    }
-    int maxLevelSum(TreeNode* root) {
-        dfs(root);
-        return max_element(sum.begin(), sum.end())-sum.begin();
-        
+    static int maxLevelSum(TreeNode* root) {
+        int idx=0, sum=INT_MIN;
+        front=back=0;// reset q
+        q[back++]=root;// push
+        int level=1;
+        for( ; front<back; level++){
+            int qz=back-front;
+            int curSum=0;
+            for (int i=0; i<qz; i++) {
+                TreeNode* Node=q[front++];// pop
+                curSum+=Node->val;
+                if (Node->left) q[back++]=Node->left;// push
+                if (Node->right) q[back++]=Node->right;// push
+            }
+            if(curSum>sum) idx=level, sum=curSum;
+        } 
+        return idx;
     }
 };
