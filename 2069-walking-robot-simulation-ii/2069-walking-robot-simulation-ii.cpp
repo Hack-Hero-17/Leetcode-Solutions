@@ -9,10 +9,9 @@ public:
         if (num >= perimeter) {
             num %= perimeter;
             if (x == 0 && y == 0 && face == 1) // edge case
-                face = 2;                      // change the starting direction
+                face = 2;     // change the starting direction
         }
-        if (num == 0)
-            return;
+        if (num == 0) return;
         int d = 0;
         switch (face) {
         case 0: // North
