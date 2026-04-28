@@ -1,28 +1,35 @@
 class Solution {
 public:
     int minOperations(vector<vector<int>>& grid, int x) {
-        vector<int> values;
+        int n = grid.size(), m = grid[0].size();
+        int N = n * m;
+        int freq[10001] = {0};
+        int mn = grid[0][0], mx = mn;
+
         for (const auto& row : grid) {
             for (int val : row) {
-                values.push_back(val);
+                if ((val - grid[0][0]) % x != 0) return -1;
+                freq[val]++;
+                mn = min(mn, val);
+                mx = max(mx, val);
             }
         }
 
-        sort(values.begin(), values.end());
+        int target = (N + 1) / 2;
+        int acc = 0, median = mn;
 
-        for (int val : values) {
-            if (abs(val - values[0]) % x != 0) {
-                return -1;
+        for (int i = mn; i <= mx; i += x) {
+            acc += freq[i];
+            if (acc >= target) {
+                median = i;
+                break;
             }
         }
 
-        int median = values[values.size() / 2];
-        int operations = 0;
+        int ops = 0;
+        for (int i = mn; i <= mx; i += x)
+            ops += abs(i - median) / x * freq[i];
 
-        for (int val : values) {
-            operations += abs(val - median) / x;
-        }
-
-        return operations;
+        return ops;
     }
 };
