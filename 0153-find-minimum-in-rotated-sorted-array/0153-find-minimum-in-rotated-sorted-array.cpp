@@ -1,20 +1,10 @@
 class Solution {
 public:
     int findMin(vector<int>& nums) {
-        int min = solveUtil( nums );
-        return min;
-    }
-    int solveUtil( vector<int>& arr ){
-        int left , right, mid;
-        left = 0;
-        right = arr.size() - 1;
-        while( left < right ){
-            mid = ( left + right )/2;
-            if( arr[mid] <= arr[right] )
-                right = mid;
-            else
-                left = mid+1;
-        }
-        return arr[left];
+        return *partition_point(nums.begin(), nums.end(), [&](int n) { return n > nums.back(); });
     }
 };
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/leethub-v4/bcilpkkbokcopmabingnndookdogmbna
