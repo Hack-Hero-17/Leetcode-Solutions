@@ -9,7 +9,8 @@ public:
             left++;
 
         while (left < right) {
-            int mid = left + right >> 1;
+            // Fixed operator precedence: compute mid as average of left and right
+            int mid = left + ((right - left) >> 1);
 
             if (nums[mid] > last)
                 left = mid + 1;
