@@ -8,8 +8,8 @@ public:
         while (left < n && nums[left] == last)
             left++;
 
-        while (left < right) {
-            // Fixed operator precedence: compute mid as average of left and right
+        while (left < right) { // Fixed operator precedence: compute mid as average of left and right
+            // Removed stray characters that caused compilation errors
             int mid = left + ((right - left) >> 1);
 
             if (nums[mid] > last)
