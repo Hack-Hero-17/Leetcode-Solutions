@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/count-the-number-of-special-characters-i/?envType=daily-question&envId=2026-05-26">3120. Count the Number of Special Characters I</a></h2><h3>Easy</h3><hr><p>You are given a string <code>word</code>. A letter is called <strong>special</strong> if it appears <strong>both</strong> in lowercase and uppercase in <code>word</code>.</p>
+<h2><a href="https://leetcode.com/problems/count-the-number-of-special-characters-i">3120. Count the Number of Special Characters I</a></h2><h3>Easy</h3><hr><p>You are given a string <code>word</code>. A letter is called <strong>special</strong> if it appears <strong>both</strong> in lowercase and uppercase in <code>word</code>.</p>
 
 <p>Return the number of<em> </em><strong>special</strong> letters in<em> </em><code>word</code>.</p>
 
