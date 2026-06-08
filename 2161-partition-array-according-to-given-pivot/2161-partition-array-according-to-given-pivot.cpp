@@ -1,26 +1,23 @@
 class Solution {
 public:
-    vector<int> pivotArray(vector<int>& nums, int pivot) {
-         vector<int> result(nums.size(), 0);
-        int left = 0, right = nums.size() - 1;
-        
-        for (int i = 0, j = nums.size() - 1; i < nums.size(); ++i, --j) {
-            if (nums[i] < pivot) {
-                result[left] = nums[i];
-                left++;
-            }
-            
-            if (nums[j] > pivot) {
-                result[right] = nums[j];
-                right--;
-            }
+    static vector<int> pivotArray(vector<int>& nums, int pivot) {
+        int n=nums.size();
+        if (n==1) return nums;
+        int R[n];
+        int l=0, r=0;
+        for(int x: nums){
+            nums[l]=R[r]=x;
+            l+=(x<pivot);
+            r+=(x>pivot);
         }
-        
-        while (left <= right) {
-            result[left] = pivot;
-            left++;
-        }
-        
-        return result;
+        int m=n-r-l;
+        auto it_m=nums.begin()+l;
+        fill(it_m, it_m+m, pivot);
+        copy(R, R+r, it_m+m);
+        return nums;
     }
 };
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
