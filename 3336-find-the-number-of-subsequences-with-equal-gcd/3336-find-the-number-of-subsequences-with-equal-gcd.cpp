@@ -1,53 +1,35 @@
 class Solution {
 public:
     int subsequencePairCount(vector<int>& nums) {
-        int mod = 1e9+7;
-        int n = nums.size();
-        int mx = *max_element(nums.begin(), nums.end());
-
-        vector<vector<int>> dp(mx + 1, vector<int>(mx + 1, 0));
-        dp[0][0] = 1;
-
-        for(int num : nums){
-
-            vector<vector<int>> newDp(mx + 1, vector<int>(mx + 1, 0));
-
-            for(int gcd1 = 0; gcd1 <= mx; gcd1++){
-
-                int newGcd1 = gcd(gcd1, num);
-
-                for(int gcd2 = 0; gcd2 <= mx; gcd2++){
-
-                    if(dp[gcd1][gcd2] == 0){
-                        continue;
-                    }
-
-                    int ways = dp[gcd1][gcd2];
-                    int newGcd2 = gcd(gcd2, num);
-
-                    // Ignore current number
-                    newDp[gcd1][gcd2] = (newDp[gcd1][gcd2] + ways) % mod;
-
-                    // Put into first subsequence
-                    newDp[newGcd1][gcd2] = (newDp[newGcd1][gcd2] + ways) % mod;
-
-                    // Put into second subsequence
-                    newDp[gcd1][newGcd2] = (newDp[gcd1][newGcd2] + ways) % mod;
+        const int MOD=1000000007;
+        const int M=200;
+        vector<vector<int>>dp(M+1,vector<int>(M+1));
+        dp[0][0]=1;
+        for(int x:nums){
+            vector<vector<int>> ndp=dp;
+            for(int g1=0;g1<=M;g1++){
+                for(int g2=0; g2<=M;g2++){
+                    int cur=dp[g1][g2];
+                    if(!cur) continue;
+                    int ng1=g1 == 0 ? x:std::gcd(g1,x);
+                    int &a=ndp[ng1][g2];
+                    a +=cur;
+                    if(a>=MOD) a-=MOD;
+                    int ng2=g2==0 ? x:std::gcd(g2,x);
+                    int &b=ndp[g1][ng2];
+                    b+=cur;
+                    if(b>=MOD) b-=MOD;
                 }
             }
-
-            dp = newDp;
+            dp.swap(ndp);
         }
-
-        int ans = 0;
-
-        for(int gcdVal = 1; gcdVal <= mx; gcdVal++){
-            ans = (ans + dp[gcdVal][gcdVal]) % mod;
+        long long ans=0;
+        for(int g=1;g<=M;g++){
+            ans+=dp[g][g];
         }
-
-        return ans;
+        return ans%MOD;
     }
-}
+};
 
 // Synced seamlessly with LeetHub Pro
 // Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
