@@ -1,58 +1,52 @@
 class Solution {
 public:
     int orangesRotting(vector<vector<int>>& grid) {
+        queue<pair<int,int>> rotten;
+
+        if( grid.empty() ) return 0;
+        int tot=0;
+        int days=0;
+        int cnt=0;
+
+        for( int i=0; i<grid.size(); i++){
+            for( int j=0; j<grid[0].size() ; j++) {
+                if( grid[i][j] == 2 ){
+                    rotten.push( { i, j } );
+                }
+                if( grid[i][j] != 0)
+                    tot++;
+            }
+        }
+
+    int dx[4] = {0, 0, 1, -1};
+    int dy[4] = {1, -1, 0, 0};
+        while( !rotten.empty()){
+            int k = rotten.size();
+            cnt += k;
+            while(k--){
+                int x = rotten.front().first;
+                int y = rotten.front().second;
+                rotten.pop();
+                
+                for( int i=0; i< 4; i++){
+                    int m = x + dx[i];
+                    int n = y + dy[i];
+                    if( m<0 || n<0 || m>=grid.size() || n>=grid[0].size() || grid[m][n] !=1 ){
+                        continue;
+                    }
+                    grid[m][n] = 2;
+                    rotten.push({m,n});
+                }
+            }
+            if( !rotten.empty() )
+                days++;
+        }
         
-        int m = grid.size();
-        int n = grid[0].size();
-        queue<pair<pair<int,int>,int>> q;
-        vector<vector<int>> vis(m, vector<int>(n, 0));
-        int cntFresh = 0;
-        for( int i =0;i<m;i++)
-        {
-            for( int j=0; j<n ; j++ )
-            {
-                if( grid[i][j] == 2 )
-                {
-                    q.push( { {i,j}, 0 });
-                    vis[i][j] = 2;
-                }
-                else if( grid[i][j] == 1 )
-                {
-                    vis[i][j] = 0;
-                    cntFresh++;
-                }
-                else
-                {
-                    vis[i][j] = 0;
-                }
-            }
-        }
-
-        int tm=0; int cnt=0;
-        int drow[] = { -1 , 0 , +1 , 0};
-        int dcol[] = { 0 , +1 , 0 , -1 };
-        while( !q.empty() )
-        {
-            int r = q.front().first.first;
-            int c = q.front().first.second;
-            int t = q.front().second;
-            tm = max(tm,t);
-            q.pop();
-            for( int i=0 ; i<4 ; i++ )
-            {
-                int nrow = r + drow[i];
-                int ncol = c + dcol[i];
-                if( nrow>=0 && nrow<m && ncol>=0 && ncol<n && vis[nrow][ncol] != 2 && grid[nrow][ncol] == 1 )
-                {
-                    q.push({{nrow,ncol},t+1});
-                    vis[nrow][ncol] = 2;
-                    cnt++;
-                }
-            }
-        }
-
-        if( cntFresh != cnt )
-            return -1;
-        return tm;
+    return tot == cnt ? days : -1;
+        
     }
 };
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
