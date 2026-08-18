@@ -1,34 +1,39 @@
 class Solution {
 public:
-    bool canFinish(int n, vector<vector<int>>& prerequisites) {
-        vector<int> adj[n];
-        vector<int> indegree(n, 0);
-        vector<int> ans;
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<vector<int>> adj(numCourses);
+        vector<int> indegree(numCourses, 0);
 
-        for(auto x: prerequisites){
-            adj[x[1]].push_back(x[0]);
-            indegree[x[0]]++;
+        for( auto &p : prerequisites ){
+            int course = p[0];
+            int prerequisite = p[1];
+            adj[prerequisite].push_back(course);
+            indegree[course]++;
         }
 
         queue<int> q;
-        for(int i = 0; i < n; i++){
-            if(indegree[i] == 0){
+        for(int i = 0; i < numCourses; i++) {
+            if(indegree[i] == 0)
                 q.push(i);
-            }
         }
-
+        vector<int> order;
         while(!q.empty()){
-            auto t = q.front();
-            ans.push_back(t);
+            int course = q.front();
             q.pop();
-
-            for(auto x: adj[t]){
-                indegree[x]--;
-                if(indegree[x] == 0){
-                    q.push(x);
-                }
+            order.push_back(course);
+            for( auto &p : adj[course] ){
+                indegree[p]--;
+                if( indegree[p] == 0 )
+                    q.push(p);
             }
         }
-        return ans.size() == n;
+
+        if( order.size() == numCourses )
+            return true;
+        return false;
     }
 };
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
