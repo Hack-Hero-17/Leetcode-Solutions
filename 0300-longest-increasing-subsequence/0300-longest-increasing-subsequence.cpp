@@ -1,36 +1,19 @@
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
-        vector<int> res;
-
-        for (int n : nums) {
-            if (res.empty() || res.back() < n) {
-                res.push_back(n);
-            } else {
-                int idx = binarySearch(res, n);
-                res[idx] = n;
+        vector<int> dp(nums.size(),1);
+        int length=0;
+        for( int i=0; i<nums.size(); i++){
+            for( int j=0; j<i; j++){
+                if( nums[j] < nums[i] )
+                    dp[i] = max(dp[i], dp[j]+1);
             }
+            length = max(length, dp[i]);
         }
-
-        return res.size();        
+        return length;
     }
-
-private:
-    int binarySearch(const vector<int>& arr, int target) {
-        int left = 0;
-        int right = arr.size() - 1;
-
-        while (left <= right) {
-            int mid = (left + right) / 2;
-            if (arr[mid] == target) {
-                return mid;
-            } else if (arr[mid] > target) {
-                right = mid - 1;
-            } else {
-                left = mid + 1;
-            }
-        }
-
-        return left;
-    }    
 };
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
