@@ -1,0 +1,41 @@
+class Solution {
+public:
+    string shortestBeautifulSubstring(string s, int k) {
+        string ans = "";
+        int n = s.size();
+
+        for (int i = 0; i < n; i++) {
+
+            int oneCnt = 0;
+            string cur = "";
+
+            for (int j = i; j < n; j++) {
+
+                cur += s[j];
+
+                if (s[j] == '1')
+                    oneCnt++;
+
+                // More than k ones can never become valid again
+                if (oneCnt > k)
+                    break;
+
+                if (oneCnt == k) {
+
+                    if (ans == "" ||
+                        cur.size() < ans.size() ||
+                        (cur.size() == ans.size() && cur < ans)) {
+
+                        ans = cur;
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+};
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
