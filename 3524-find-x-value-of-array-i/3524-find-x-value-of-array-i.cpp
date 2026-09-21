@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<long long> resultArray(vector<int>& A, int k) {
+        vector<long long> res(k);
+        int freq[5] = {0};
+
+        for (auto& n : A) {
+            n %= k;
+            int cur[5] = {0}; //current freq.
+
+            cur[n] = 1;
+
+            for (int x = 0; x < k; x++)
+                cur[x * n % k] += freq[x];
+
+            for (int x = 0; x < k; x++) {
+                freq[x] = cur[x];
+                res[x] += freq[x];
+            }
+        }
+
+        return res;
+    }
+};
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
