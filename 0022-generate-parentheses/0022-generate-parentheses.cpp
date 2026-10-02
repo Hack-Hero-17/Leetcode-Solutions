@@ -1,24 +1,28 @@
 class Solution {
 public:
     vector<string> generateParenthesis(int n) {
+        if (n-- == 1) return {"()"};
+
         vector<string> res;
-        dfs(0, 0, "", n, res);
-        return res;        
-    }
+        auto dfs = [&](auto& self, int O, int C, string s) -> void {
+            if (O == 0 && C == 0) {
+                res.push_back(s + ")");
+                return;
+            }
 
-private:
-    void dfs(int openP, int closeP, string s, int n, vector<string>& res) {
-        if (openP == closeP && openP + closeP == n * 2) {
-            res.push_back(s);
-            return;
-        }
+            if (O > 0)
+                self(self, O - 1, C, s + "(");
 
-        if (openP < n) {
-            dfs(openP + 1, closeP, s + "(", n, res);
-        }
+            if (C >= O)
+                self(self, O, C - 1, s + ")");
+        };
 
-        if (closeP < openP) {
-            dfs(openP, closeP + 1, s + ")", n, res);
-        }
+        dfs(dfs, n, n, "(");
+
+        return res;
     }
 };
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
