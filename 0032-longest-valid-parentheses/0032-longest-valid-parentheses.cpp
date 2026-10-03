@@ -1,23 +1,32 @@
+constexpr int N=3e4;
+int st[N], top=-1;
+int dp[N];
 class Solution {
 public:
-    int longestValidParentheses(string s) {
-        stack<int> st;
-        st.push(-1);
-        int max_len = 0;
-
-        for (int i = 0; i < s.length(); i++) {
-            if (s[i] == '(') {
-                st.push(i);
-            } else {
-                st.pop();
-                if (st.empty()) {
-                    st.push(i);
-                } else {
-                    max_len = max(max_len, i - st.top());
+    static int longestValidParentheses(string& s) {
+        const int n=s.size();
+        if (n<2) return 0;
+        top=-1;
+        memset(dp, 0, n*sizeof(int));
+       
+        int ans=0;
+        for(int i=0; i<n; i++){
+            if (s[i]=='(') {
+                st[++top]=i;
+            }
+            else{ //s[i]=')'
+                if (top>=0){
+                    int x=st[top--];
+                    dp[i]=i-x+1;
+                    if (x>=1) dp[i]+=dp[x-1];
                 }
             }
+            ans=max(ans, dp[i]);
         }
-
-        return max_len;        
+        return ans;
     }
 };
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
