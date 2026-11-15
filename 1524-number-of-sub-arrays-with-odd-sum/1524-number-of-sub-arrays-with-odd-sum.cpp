@@ -1,22 +1,12 @@
 class Solution {
 public:
     int numOfSubarrays(vector<int>& arr) {
-        const int MOD = 1e9 + 7;
-        int odd_count = 0, even_count = 1; // even_count starts with 1 for an empty prefix
-        int prefix_sum = 0, result = 0;
-
-        for (int num : arr) {
-            prefix_sum += num;
-            
-            if (prefix_sum % 2 == 0) {
-                result = (result + odd_count) % MOD;
-                even_count++;
-            } else {
-                result = (result + even_count) % MOD;
-                odd_count++;
-            }
-        }
-
-        return result;
+        long long odd = ranges::count_if(arr, [sum = 0](int x) mutable { return (sum += x) & 1; });  // odd prefix sums
+        long long even = arr.size() + 1 - odd;  // the empty prefix is even
+        return odd * even % 1'000'000'007;
     }
 };
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
