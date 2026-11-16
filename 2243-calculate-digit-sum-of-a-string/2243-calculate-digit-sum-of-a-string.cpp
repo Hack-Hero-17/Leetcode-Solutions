@@ -1,0 +1,18 @@
+class Solution {
+public:
+    string digitSum(string s, int k) {
+        while (ssize(s) > k) {
+            string next;
+            for (int i = 0; i < ssize(s); i += k) {
+                string_view group = string_view(s).substr(i, k);  // the last group may be shorter
+                next += to_string(accumulate(group.begin(), group.end(), 0, [](int sum, char d) { return sum + d - '0'; }));
+            }
+            s = next;
+        }
+        return s;
+    }
+};
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
